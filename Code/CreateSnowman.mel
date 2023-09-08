@@ -1,0 +1,8 @@
+//This script will create a basic snowman for you
+int $moveDist = 0;
+for ($i = 4; $i > 1; $i--){
+    $moveDist += $i;
+    polySphere -radius $i -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+    move -relative -objectSpace -worldSpaceDistance 0 ($moveDist - (4 - $i)*($i)) 0;
+    $moveDist += $i;
+}
