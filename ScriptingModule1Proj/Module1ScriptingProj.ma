@@ -1,6 +1,6 @@
 //Maya ASCII 2024 scene
 //Name: Module1ScriptingProj.ma
-//Last modified: Thu, Sep 07, 2023 11:54:08 PM
+//Last modified: Thu, Sep 07, 2023 11:57:37 PM
 //Codeset: 1252
 requires maya "2024";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" "mtoa" "5.3.1.1";
@@ -10,11 +10,11 @@ fileInfo "product" "Maya 2024";
 fileInfo "version" "2024";
 fileInfo "cutIdentifier" "202304191415-7fa20164c6";
 fileInfo "osv" "Windows 10 Home v2009 (Build: 19045)";
-fileInfo "UUID" "77971A35-4F6B-E74B-C253-EB8A5DF18863";
+fileInfo "UUID" "F3187983-4A38-1E83-A0E0-C581B740E67F";
 createNode transform -s -n "persp";
 	rename -uid "0CDE6CE7-4425-CC49-FC33-B082E0A1C2EB";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 2.2585915032338235 1.6219295234052087 16.422871673039488 ;
+	setAttr ".t" -type "double3" -2.1308428840715283 1.7603661057890014 16.538038726217543 ;
 	setAttr ".r" -type "double3" 3.2616472632578533 721.3999999997319 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "D3138EA1-4C39-AB50-BFA3-FEA05E630155";
@@ -1638,23 +1638,23 @@ createNode mesh -n "backLeg2Shape" -p "backLeg2";
 	setAttr ".pt[199]" -type "float3" 0 -0.40000001 0 ;
 	setAttr ".pt[380]" -type "float3" 0 -0.40000001 0 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "61EE8777-4199-38F3-6991-6682C29DA991";
+	rename -uid "DFBDA12C-4852-7814-E1B7-D1944270AF0A";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "03BEA950-450A-25F4-06A7-7E83C6B577B7";
+	rename -uid "81B90713-4902-E3F3-D8AD-83A1004E2005";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "C6F4F911-43AF-21F6-3745-E7B024470BD5";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "A843A6B6-423D-2F64-CD04-60ACDDE9166F";
+	rename -uid "67175F0F-4F08-1A99-71AD-C1A9CE73E459";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "CBF60E9F-45CE-3C6E-FB3B-B4883FC7E1E2";
 	setAttr ".g" yes;
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "8A00E4C2-4F56-B00E-E7EC-4BA6DBA73AF0";
+	rename -uid "A6E4EF1E-4847-B430-031A-E2B5ABE1AA13";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "1D38C5F0-4CBB-DC39-D83C-1097A23B75A7";
+	rename -uid "383EAFCE-4951-D3D7-5F2C-7CA0442DECC7";
 createNode aiOptions -s -n "defaultArnoldRenderOptions";
 	rename -uid "307082CC-45C5-892B-EEA6-88B1A5CC406A";
 	setAttr ".version" -type "string" "5.3.1.1";
