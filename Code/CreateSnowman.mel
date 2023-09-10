@@ -30,9 +30,11 @@ proc createSnowMan(float $ballSizes[], float $overLap) {
     float $armDist = 0;
     float $middleBallSize = $ballSizes[size($ballSizes)/2];
     for ($i = 0; $i <= size($ballSizes)/2; $i++){
-        $armDist += $ballSizes[$i] + $ballSizes[$i]*$overLap;
+        $armDist += $ballSizes[$i];
+        if ($i != size($ballSizes)/2){
+            $armDist += $ballSizes[$i]*$overLap;
+        }
     }
-    $armDist -= $middleBallSize*$overLap;
     for ($i = -1; $i <= 1; $i += 2){
         $currentObj = `polyCylinder -radius ($middleBallSize/8) -height ($middleBallSize*2) -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1 -name "armCylinder0"`;
         move -relative -objectSpace -worldSpaceDistance ($i*$middleBallSize*1.2) ($armDist + $middleBallSize*0.1) 0 $currentObj[0];
@@ -41,6 +43,11 @@ proc createSnowMan(float $ballSizes[], float $overLap) {
         move -relative -objectSpace -worldSpaceDistance ($i*$middleBallSize*1.7) ($armDist + $middleBallSize*0.65) 0 $currentObj[0];
         rotate -relative -objectSpace -forceOrderXYZ 0 0 ($i*20) $currentObj[0];
     }
+    //creating the coal buttons
+    for ($i = 1; $i >= -1; $i--){
+        $currentObj = `polySphere -radius ($middleBallSize/8) -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1 -name "coalButton0"`;
+        move -relative -objectSpace -worldSpaceDistance 0 ($armDist + $i*($middleBallSize/3)) ($middleBallSize - abs($i*$middleBallSize/18)) $currentObj[0];
+    }
 }
 
-createSnowMan({25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5}, 0.75);
+createSnowMan({5.5,4,3}, 0.75);
