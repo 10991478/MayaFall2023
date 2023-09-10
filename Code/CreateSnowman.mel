@@ -1,8 +1,31 @@
 //This script will create a basic snowman for you
-int $moveDist = 0;
-for ($i = 4; $i > 1; $i--){
-    $moveDist += $i;
-    polySphere -radius $i -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
-    move -relative -objectSpace -worldSpaceDistance 0 ($moveDist - (4 - $i)*($i)) 0;
-    $moveDist += $i;
+
+proc createSnowMan(float $ballSizes[], float $overLap) {
+    int $moveDist = 0;
+    string $currentObj[];
+    //creating the snowballs
+    for ($i = 0; $i < size($ballSizes); $i++){
+        $moveDist += $ballSizes[$i];
+        $currentObj = `polySphere -radius $ballSizes[$i] -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1 -name "snowmanBall0"`;
+        move -relative -objectSpace -worldSpaceDistance 0 $moveDist 0 $currentObj[0];
+        $moveDist += $ballSizes[$i]*$overLap;
+    }
+    float $lastBallSize = $ballSizes[size($ballSizes) - 1];
+    $moveDist -= $lastBallSize*$overLap;
+    //creating the nose
+    $currentObj = `polyCone -radius ($lastBallSize/4) -height (1.5*$lastBallSize) -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 0 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1 -name "snowmanNose"`;
+    move -relative -objectSpace -worldSpaceDistance 0 $moveDist ($lastBallSize*1.3) $currentObj[0];
+    rotate -relative -objectSpace -forceOrderXYZ 90 0 0 $currentObj[0];
+    //creating the eyes
+    for ($i = -1; $i <= 1; $i+=2){
+        $currentObj = `polySphere -radius ($lastBallSize/7) -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1 -name "snowmanEye0"`;
+        move -relative -objectSpace -worldSpaceDistance ($i*$lastBallSize/3) ($moveDist + $lastBallSize/10) ($lastBallSize*0.9) $currentObj[0];
+    }
+    //creating the hat
+    $currentObj = `polyCylinder -radius $lastBallSize -height ($lastBallSize/8) -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1 -name "hatBase"`;
+    move -relative -objectSpace -worldSpaceDistance 0 ($moveDist + $lastBallSize*$overLap) 0 $currentObj[0];
+    $currentObj = `polyCylinder -radius ($lastBallSize*0.7) -height ($lastBallSize*1.25) -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1 -name "hatTop"`;
+    move -relative -objectSpace -worldSpaceDistance 0 ($moveDist + $lastBallSize*$overLap + ($lastBallSize*1.25)/2) 0 $currentObj[0];
 }
+
+createSnowMan({5.5, 4.0, 3.0}, 0.75);
