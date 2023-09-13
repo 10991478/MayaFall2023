@@ -1,6 +1,6 @@
 //Maya ASCII 2024 scene
 //Name: Unit1Project.ma
-//Last modified: Wed, Sep 13, 2023 09:42:34 AM
+//Last modified: Wed, Sep 13, 2023 11:30:36 AM
 //Codeset: 1252
 requires maya "2024";
 requires "stereoCamera" "10.0";
@@ -13,7 +13,7 @@ fileInfo "product" "Maya 2024";
 fileInfo "version" "2024";
 fileInfo "cutIdentifier" "202304191415-7fa20164c6";
 fileInfo "osv" "Windows 10 Home v2009 (Build: 19045)";
-fileInfo "UUID" "4D4E38D7-4770-3AF1-FF73-988CE87FF3A6";
+fileInfo "UUID" "CBAB8317-4666-415A-A38E-96A36B7DCDDD";
 createNode transform -s -n "persp";
 	rename -uid "19F1B2F5-48F6-C5EE-57FD-DAB2CB4F84A0";
 	setAttr ".v" no;
@@ -1476,7 +1476,7 @@ createNode transform -n "Ball_Def_Squash_Handle" -p "Deformers";
 createNode deformSquash -n "Ball_Def_Squash_HandleShape" -p "Ball_Def_Squash_Handle";
 	rename -uid "3B37BB6C-424C-6106-832D-AC9DC1A16D70";
 	setAttr -k off ".v";
-	setAttr ".dd" -type "doubleArray" 7 -1 1 0 0 0.75 1 -0.5 ;
+	setAttr ".dd" -type "doubleArray" 7 -1 1 0 0 0.75 1 0.047062349164935902 ;
 	setAttr ".hw" 11.000001049041749;
 createNode parentConstraint -n "Ball_Def_Squash_Handle_parentConstraint1" -p "Ball_Def_Squash_Handle";
 	rename -uid "1C5DFF31-475A-29F6-8385-45915EB5614B";
@@ -1920,19 +1920,21 @@ createNode transform -n "BlackKey24";
 	setAttr ".sp" -type "double3" 2.2501813347593198 8.7680209397791948 -9.5820570010709503 ;
 createNode transform -n "camera1";
 	rename -uid "D7701785-4712-DDF6-6812-DE9180EB6AF3";
-	setAttr ".t" -type "double3" 65.288129647438311 31.553184647575037 53.737709883399333 ;
-	setAttr ".r" -type "double3" -18.796717245230809 15.983748978469798 8.2711507364231183e-16 ;
+	setAttr ".t" -type "double3" 62.570050333547911 30.517794843053316 44.616416610634886 ;
+	setAttr ".r" -type "double3" -19.396717245230825 15.183748978469797 -4.1195017751396302e-16 ;
 createNode camera -n "cameraShape1" -p "camera1";
 	rename -uid "5D816CF2-4E35-F3AF-06D5-D3B38D9DE852";
 	setAttr -k off ".v";
 	setAttr ".cap" -type "double2" 1.41732 0.94488 ;
 	setAttr ".ff" 0;
-	setAttr ".coi" 76.59726524302576;
+	setAttr ".ovr" 1.3;
+	setAttr ".coi" 67.267797703894516;
 	setAttr ".ow" 30;
 	setAttr ".imn" -type "string" "camera1";
 	setAttr ".den" -type "string" "camera1_depth";
 	setAttr ".man" -type "string" "camera1_mask";
 	setAttr ".tp" -type "double3" 14.226440093550195 7.5492176451673485 2.2606452596307824 ;
+	setAttr ".dfg" yes;
 	setAttr ".col" -type "float3" 0.015900001 0 0.087300003 ;
 createNode transform -n "imagePlane1" -p "cameraShape1";
 	rename -uid "DB2A8A8D-44F3-153E-6041-2CADBA8E18B3";
@@ -3061,8 +3063,8 @@ createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
 	setAttr ".tgi[0].ni[8].y" 293.54983520507812;
 	setAttr ".tgi[0].ni[8].nvs" 1923;
 select -ne :time1;
-	setAttr ".o" 25;
-	setAttr ".unw" 25;
+	setAttr ".o" 41;
+	setAttr ".unw" 41;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
