@@ -15,8 +15,8 @@ proc float Divide(float $nums[]){
 }
 
 proc float Add(float $nums[]){
-    float $sum = $nums[0];
-    for ($i = 1; $i < size($nums); $i++){
+    float $sum = 0;
+    for ($i = 0; $i < size($nums); $i++){
         $sum += $nums[$i];
     }
     return $sum;
