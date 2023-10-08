@@ -1,0 +1,19 @@
+proc PlacementGenerator(float $xMin, float $xMax, float $yMin, float $yMax, float $zMin, float $zMax, int $numOfDupes){
+    string $objectArray[] = `ls -selection`;
+
+    for ($i = 0; $i < size($objectArray); $i++){
+
+        for ($j = 0; $j < $numOfDupes; $j++){
+            string $dups[] = `duplicate $objectArray[$i]`;
+            string $dup = $dups[0];
+
+            float $xPos =  `rand $xMin $xMax`;
+            float $yPos =  `rand $yMin $yMax`;
+            float $zPos =  `rand $zMin $zMax`;
+
+            xform -worldSpace -translation $xPos $yPos $zPos $dup;
+        }
+    }
+}
+
+PlacementGenerator(0,20,0,20,0,20,10);
