@@ -39,7 +39,7 @@ global proc float Subtract(float $nums[]){
     into the Calculator method*/
 global proc float Power(float $nums[]){
     float $base = $nums[0];
-    if (size($nums) = 1){
+    if (size($nums) == 1){
         return $base;
     }
     else {
@@ -47,7 +47,7 @@ global proc float Power(float $nums[]){
         for ($i = 1; $i < size($nums); $i++){
             $power *= (int)$nums[$i];
         }
-        int $tempPower = (`abs $power`);
+        int $tempPower = `abs $power`;
         float $result = 1;
         for ($i = 0; $i < $tempPower; $i++){
             $result *= $base;
@@ -188,6 +188,7 @@ global proc float Calculate(string $operation, float $nums[], int $shouldPrint){
     return $result;
 }
 
+/*
 //testing the individual methods
 print("Median: " + Median({1,2,3,4,5,6}) + "\n");
 print("Multiply: " + Multiply({1,2,3,4,5}) + "\n");
@@ -206,7 +207,7 @@ Calculate("subtract", {10,6,4,2}, 1);
 Calculate("power", {2,-3}, 1);
 Calculate("mean", {1,2,3,6}, 1);
 Calculate("bogus", {0}, 1);
-
+*/
 
 
 proc CalculatorUI(){
@@ -216,9 +217,29 @@ proc CalculatorUI(){
     }
 
     window -title "Calculator" -sizeable 1 -height 300 -width 400 $mainWindow;
-        string $radioRow = `rowLayout -numberOfColumns 2 -parent $mainWindow`;
-            string $operationRadios = `radioCollection`;
-            string $leftColumn = `columnLayout -parent $radioRow`;
-
-            string $rightColumn = `columnLayout -parent $radioRow`;
+        string $mainColumn = `columnLayout -parent $mainWindow`;
+            string $radioRow = `rowLayout -numberOfColumns 2 -parent $mainColumn`;
+                string $operationRadios = `radioCollection`;
+                string $leftColumn = `columnLayout -parent $radioRow`;
+                    optionVar -stringValue "addRBT" `radioButton -label "Add" -collection $operationRadios -parent $leftColumn`;
+                    optionVar -stringValue "subRBT" `radioButton -label "Subtract" -collection $operationRadios -parent $leftColumn`;
+                    optionVar -stringValue "multRBT" `radioButton -label "Multiply" -collection $operationRadios -parent $leftColumn`;
+                    optionVar -stringValue "divRBT" `radioButton -label "Divide" -collection $operationRadios -parent $leftColumn`;
+                string $rightColumn = `columnLayout -parent $radioRow`;
+                    optionVar -stringValue "powRBT" `radioButton -label "Power" -collection $operationRadios -parent $rightColumn`;
+                    optionVar -stringValue "meanRBT" `radioButton -label "Mean" -collection $operationRadios -parent $rightColumn`;
+                    optionVar -stringValue "medRBT" `radioButton -label "Median" -collection $operationRadios -parent $rightColumn`;
+            string $finalColumn = `columnLayout -parent $mainColumn`;
+                string $bnRow = `rowLayout -numberOfColumns 2 -parent $finalColumn`;
+                    text -label "  Base Number:  " -parent $bnRow;
+                    optionVar -stringValue "baseNum" `floatField -parent $bnRow`;
+                string $onRow = `rowLayout -numberOfColumns 3 -parent $finalColumn`;
+                    text -label "  Operating Numbers:  " -parent $onRow;
+                    optionVar -stringValue "opNums" `floatField -parent $onRow`;
+                    string $addNumButton = `button -label "Add Number to Operation" -parent $onRow`;
+                optionVar -stringValue "resultTXT" `text -label "BASE [operation] OPNUM0 [operation] OPNUM1 = RESULT" -parent $finalColumn`;
+    
+    showWindow $mainWindow;
 }
+
+CalculatorUI();
