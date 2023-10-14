@@ -210,6 +210,20 @@ Calculate("bogus", {0}, 1);
 */
 
 
+proc UpdateTextDisplay(){
+    string selectedRadio = `radioCollection -q -select `optionVar -q "operationRadios"``;
+}
+
+proc UpdateBaseNum(){
+
+}
+
+proc AddOpNum(){
+    optionVar -floatValueAppend "operationNumsArray" `floatField -q -value "opNum"`;
+    UpdateTextDisplay();
+}
+
+
 proc CalculatorUI(){
     string $mainWindow = "calculatorWindow";
     if (`window -exists $mainWindow`){
@@ -219,7 +233,8 @@ proc CalculatorUI(){
     window -title "Calculator" -sizeable 1 -height 300 -width 400 $mainWindow;
         string $mainColumn = `columnLayout -parent $mainWindow`;
             string $radioRow = `rowLayout -numberOfColumns 2 -parent $mainColumn`;
-                string $operationRadios = `radioCollection`;
+                optionVar -stringValue "operationRadios" `radioCollection`;
+                string $operationRadios = `optionVar -q "operationRadios"`;
                 string $leftColumn = `columnLayout -parent $radioRow`;
                     optionVar -stringValue "addRBT" `radioButton -label "Add" -collection $operationRadios -parent $leftColumn`;
                     optionVar -stringValue "subRBT" `radioButton -label "Subtract" -collection $operationRadios -parent $leftColumn`;
@@ -235,8 +250,9 @@ proc CalculatorUI(){
                     optionVar -stringValue "baseNum" `floatField -parent $bnRow`;
                 string $onRow = `rowLayout -numberOfColumns 3 -parent $finalColumn`;
                     text -label "  Operating Numbers:  " -parent $onRow;
-                    optionVar -stringValue "opNums" `floatField -parent $onRow`;
+                    optionVar -stringValue "opNum" `floatField -parent $onRow`;
                     string $addNumButton = `button -label "Add Number to Operation" -parent $onRow`;
+    optionVar -floatArray "operationNumsArray" {floatField -q -value "baseNum"};
                 optionVar -stringValue "resultTXT" `text -label "BASE [operation] OPNUM0 [operation] OPNUM1 = RESULT" -parent $finalColumn`;
     
     showWindow $mainWindow;
